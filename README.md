@@ -42,7 +42,7 @@ It is simple to fork a github repo - follow along for further details.
 - As you work don't forget to `git commit` and `git push`!
 
 ## Example Projects & Templates
-An example template has been provided for those new to hackathons.
+Some example templates are sohwn below. You may either use these for inspiration for how to code your own game or as a starting point for your game (you may take one of these and expand on it, although it might be hard to think of as much to add as you could if you started from scratch).
 
 - [Python Pyxel](https://github.com/HiruNya/DSC-RetroHackathon-Template)
 - [Minesweeper and 2048](https://github.com/PeterGoedeke/small-games/tree/master)
