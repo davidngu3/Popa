@@ -1,6 +1,9 @@
-<h1>Retro Game Hackathon</h1>
-<img src="https://www.thesixthaxis.com/wp-content/uploads/2019/07/SpaceINvaders_500.jpg">
-<h2>Introduction</h2>
+# Retro Game Hackathon
+
+![](https://www.thesixthaxis.com/wp-content/uploads/2019/07/SpaceINvaders_500.jpg)
+
+## Introduction
+
 Welcome to the retro game hackathon!
 
 You - possibly together with a teammate - will have 24 hours to complete this virtual hackathon, trying to code a retro game to wow judges and win prizes.
@@ -9,40 +12,39 @@ Winners are determined using a number of categories, including: technical abilit
 
 This is the base repository for the hackathon. Please read the rules and regulations and how to begin sections below carefully to understand how to compete, especially if you are not familiar with GitHub.
 
-<h2>Rules and Regulations</h2>
+## Rules and Regulations
 - You may ask for help from the available mentors for this hackathon.
 
 - You may use the resources and templates provided.
 
 - Your submission may be written in any language. Language specific submission requirements are detailed below:
+
 ### Submission requirements
-- Java: you should provide a runnable jar file in the repository along with instructions in case it requires any arguments. If the jar file is compiled for a specific operating system, please specify which. Compatibility with Java 8 or 11 required.
 
-- Python: include a requirements.txt and give clear instructions as to which file is the main file and how to run the application.
+- **Java**: you should provide a runnable jar file in the repository along with instructions in case it requires any arguments. If the jar file is compiled for a specific operating system, please specify which. Compatibility with Java 8 or 11 required.
 
-- JavaScript: upload your submission to GitHub pages and provide a link to the upload within the README of your repository.
+- **Python**: include a requirements.txt and give clear instructions as to which file is the main file and how to run the application.
 
-- Other languages: included compiled binaries for the application which would run on Linux (specifically Ubuntu 20).
+- **JavaScript**: upload your submission to GitHub pages and provide a link to the upload within the README of your repository.
+
+- **Other languages**: included compiled binaries for the application which would run on Linux (specifically Ubuntu 20).
 
 If you have concerns, feel free to ask in the server linked below to see if the way that you plan to upload your project is easily markable.
 
-<h2>How to Begin</h2>
+## How to Begin
 It is simple to fork a github repo - follow along for further details.
-<ol>
-    <li>In the upper-right hand side of this page click the 'fork' button.
-    <li>Open your git cli and enter the following command, replacing the &lt;USERNAME> tag w
-    ith your github username: <code>git clone https://github.com/&lt;USERNAME>/RetroGameHackathon.git</code>
-    <li>Follow the prompts to clone the forked repo to your computer.
-    <li><code>cd RetroGameHackathon</code>
-    <li>Navigate to your cloned directory and begin coding!
-    <li>As you work don't forget to <code>git commit</code> and <code>git push</code>!
-</ol>
 
-<h2>Example Projects & Templates</h2>
+- In the upper-right hand side of this page click the 'fork' button.
+- Open your git cli and enter the following command, replacing the <USERNAME> tag with your github username: `git clone https://github.com/<USERNAME>/RetroGameHackathon.git`
+- Follow the prompts to clone the forked repo to your computer.
+- `cd RetroGameHackathon`
+- Navigate to your cloned directory and begin coding!
+- As you work don't forget to `git commit` and `git push`!
+
+## Example Projects & Templates
 An example template has been provided for those new to hackathons.
-<ul>
-    <li><a href="https://github.com/HiruNya/DSC-RetroHackathon-Template">Python Pyxel</a></li>
-</ul>
+
+- [Python Pyxel](https://github.com/HiruNya/DSC-RetroHackathon-Template)
 
 ## Prizes
 ### Creativity
@@ -73,11 +75,11 @@ An example template has been provided for those new to hackathons.
 - Additionally, the GitHub readme should describe what the game is, what features are present in the game, and what makes the game different from the original it is based on. This should be accompanied with screenshots.
 - If the code itself is commented, this is taken into consideration.
 
-<h2>Where to Ask for Help</h2>
+## Where to Ask for Help
 This competition is intended to be accessible for audiences newer to programming and hackathons. As such, we have provided several resources to help you on your way throughout the competition.
 
 
-<h3>Community Discord</h3>
+### Community Discord
 Come see us on the DSC UoA discord, where we have mentors and judges available to help with any coding or git problem.
 
 <a href="https://discord.gg/7cQpg4q">
@@ -86,6 +88,6 @@ Come see us on the DSC UoA discord, where we have mentors and judges available t
 </a>
 
 
-<h1>About Us</h1>
+# About Us
 
 Developer Student Clubs are clubs funded directly by Google to provide important learning for up and coming software developers. Our goal is to inspire and provide students to become proficient in all stages of the programming development cycle.
