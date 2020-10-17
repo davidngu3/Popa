@@ -45,6 +45,7 @@ It is simple to fork a github repo - follow along for further details.
 An example template has been provided for those new to hackathons.
 
 - [Python Pyxel](https://github.com/HiruNya/DSC-RetroHackathon-Template)
+- [Minesweeper and 2048](https://github.com/PeterGoedeke/small-games/tree/master)
 
 ## Prizes
 ### Creativity
