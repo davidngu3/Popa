@@ -39,9 +39,9 @@ It is simple to fork a github repo - follow along for further details.
 </ol>
 
 <h2>Example Projects & Templates</h2>
-Several example projects and templates have been provided for those new to hackathons.
+An example template has been provided for those new to hackathons.
 <ul>
-    <li>//TBD
+    <li><a href="https://github.com/HiruNya/DSC-RetroHackathon-Template">Python Pyxel</a></li>
 </ul>
 
 ## Prizes
