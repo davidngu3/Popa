@@ -6,7 +6,7 @@
 
 Welcome to the retro game hackathon!
 
-You - possibly together with a teammate - will have 24 hours to complete this virtual hackathon, trying to code a retro game to wow judges and win prizes.
+You - possibly together with a teammate - will have until 11:59pm to complete this virtual hackathon, trying to code a retro game to wow judges and win prizes.
 
 Winners are determined using a number of categories, including: technical ability, art, judges pick, creativity, and documentation. This is explained more below.
 
