@@ -80,12 +80,7 @@ This competition is intended to be accessible for audiences newer to programming
 
 
 ### Community Discord
-Come see us on the DSC UoA discord, where we have mentors and judges available to help with any coding or git problem.
-
-<a href="https://discord.gg/7cQpg4q">
-    https://discord.gg/7cQpg4q<br/>
-    <img height="50px"; src="https://www.freepnglogos.com/uploads/discord-logo-png/concours-discord-cartes-voeux-fortnite-france-6.png">
-</a>
+Come see us in the #workshops channel of the DSC Adelaide discord server, where we have mentors and judges available to help with any coding or git problems. https://discord.gg/7cQpg4q
 
 
 # About Us
