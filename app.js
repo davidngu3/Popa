@@ -13,18 +13,19 @@ var Popa = new Phaser.Class({
             this.topbar;
             this.pieces;
             this.timedEvent;
+            this.buttonD;
         },
 
     preload: function () {
         this.load.image('background', 'assets/background.png');
         this.load.image('main', 'assets/main.png');
-        this.load.image('D', 'assets/button-D.png');
-        this.load.image('F', 'assets/button-F.png');
-        this.load.image('J', 'assets/button-J.png');
-        this.load.image('K', 'assets/button-K.png');
         this.load.image('bullet', 'assets/bullet.png');
         this.load.image('topbar', 'assets/topbar.png');
         this.load.image('piece', 'assets/piece.png');
+        this.load.spritesheet('spriteD', 'assets/spriteD.png', {frameWidth: 100, frameHeight: 100});
+        this.load.spritesheet('spriteF', 'assets/spriteF.png', {frameWidth: 100, frameHeight: 100});
+        this.load.spritesheet('spriteJ', 'assets/spriteJ.png', {frameWidth: 100, frameHeight: 100});
+        this.load.spritesheet('spriteK', 'assets/spriteK.png', {frameWidth: 100, frameHeight: 100});
     },
 
     create: function () {
@@ -36,10 +37,10 @@ var Popa = new Phaser.Class({
 
         // create buttons group
         this.buttons = this.physics.add.staticGroup();
-        this.buttons.create(250, 550, 'D');
-        this.buttons.create(350, 550, 'F');
-        this.buttons.create(450, 550, 'J');
-        this.buttons.create(550, 550, 'K');
+        this.buttons.create(250, 550, 'spriteD');
+        this.buttons.create(350, 550, 'spriteF');
+        this.buttons.create(450, 550, 'spriteJ');
+        this.buttons.create(550, 550, 'spriteK');
         
         // create pieces group
         this.pieces = this.physics.add.group({
@@ -51,6 +52,7 @@ var Popa = new Phaser.Class({
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
         keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+
 
         this.topbar = this.physics.add.staticGroup();
         this.topbar.create(400, 10, 'topbar');
