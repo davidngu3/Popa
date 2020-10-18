@@ -10,28 +10,26 @@ var Popa = new Phaser.Class({
             this.background;
             this.main;
             this.buttons;
-            this.bartop;
+            this.topbar;
             this.pieces;
             this.timedEvent;
             this.buttonD;
             this.bgm;
             this.score = 0;
             this.scoreText;
-            this.speed = 1;
-            this.delay;
         },
 
     preload: function () {
         this.load.image('background', 'assets/background.png');
         this.load.image('main', 'assets/main.png');
         this.load.image('bullet', 'assets/bullet.png');
-        this.load.image('bartop', 'assets/bartop.png');
+        this.load.image('topbar', 'assets/topbar.png');
         this.load.image('piece', 'assets/piece.png');
         this.load.spritesheet('spriteD', 'assets/spriteD.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteF', 'assets/spriteF.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteJ', 'assets/spriteJ.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteK', 'assets/spriteK.png', { frameWidth: 100, frameHeight: 100 });
-        this.load.audio('bass', 'assets/Popa Theme.mp3');
+        this.load.audio('bass', 'assets/Popa Theme 2.mp3');
     },
 
     create: function () {
@@ -39,7 +37,7 @@ var Popa = new Phaser.Class({
         this.bgm = this.sound.add('bass', {
             mute: false,
             volume: 1,
-            rate: this.speed,
+            rate: 1,
             detune: 0,
             seek: 0,
             loop: true,
@@ -64,7 +62,7 @@ var Popa = new Phaser.Class({
 
         // create pieces group
         this.pieces = this.physics.add.group({
-            velocityY: this.speed * 100,
+            velocityY: 100,
         });
 
         // set key bindings
@@ -74,41 +72,39 @@ var Popa = new Phaser.Class({
         keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
 
-        this.bartop = this.physics.add.staticGroup();
-        this.bartop.create(400, 10, 'bartop');
+        this.topbar = this.physics.add.staticGroup();
+        this.topbar.create(400, 10, 'topbar');
 
         this.bullet = this.physics.add.group({
-            velocityY: -500
+            velocityY: -100
         });
+
 
         this.scoreText = this.add.text(620, 16, "Score: 0", { fontSize: '32px', fill: '#ffffff' });
 
         //  Our colliders
-        this.physics.add.collider(this.bullet, this.bartop, this.collideWithTop, null, this);
+        this.physics.add.collider(this.bullet, this.topbar, this.collideWithTop, null, this);
         this.physics.add.collider(this.bullet, this.pieces, this.collideWithPiece, null, this);
         this.physics.add.collider(this.pieces, this.buttons, this.collideWithButton, null, this);
 
         // timer
-        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
+        timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
     },
 
     collideWithPiece: function (bullet, piece) {
         bullet.disableBody(true, true);
         piece.disableBody(true, true);
         this.score++;
+        console.log(this.score);
         this.scoreText.setText('Score: ' + this.score);
     },
 
-    collideWithTop: function (bullet, bartop) {
+    collideWithTop: function (bullet, topbar) {
         bullet.disableBody(true, true);
     },
 
     collideWithButton: function (piece, button) {
         piece.disableBody(true, true);
-        this.speed *= 1.2;
-        this.bgm.rate *= 1.1;
-        this.pieces.setVelocityY(this.speed * 100);
-        this.timedEvent.delay *= 0.8;
     },
 
     update: function () {
@@ -129,9 +125,18 @@ var Popa = new Phaser.Class({
 
     createPiece: function () {
         var randColumn = Math.floor(Math.random() * 4); // random int from 0-3
-
-        this.pieces.create(250 + randColumn * 100, 65, 'piece');
-        this.pieces.setVelocityY(this.speed * 100);
+        if (randColumn == 0) {
+            this.pieces.create(250, 65, 'piece');
+        }
+        else if (randColumn == 1) {
+            this.pieces.create(350, 65, 'piece');
+        }
+        else if (randColumn == 2) {
+            this.pieces.create(450, 65, 'piece');
+        }
+        else if (randColumn == 3) {
+            this.pieces.create(550, 65, 'piece');
+        }
     }
 
 });
