@@ -81,7 +81,7 @@ var Popa = new Phaser.Class({
             velocityY: -500
         });
 
-        this.scoreText = this.add.text(620, 16, "Score: 0", { fontSize: '32px', fill: '#ffffff' });
+        this.scoreText = this.add.text(636, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
 
         //  Our colliders
         this.physics.add.collider(this.bullet, this.bartop, this.collideWithTop, null, this);
