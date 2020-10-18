@@ -1,40 +1,36 @@
-Welcome to **POPA**! 
+# Welcome to **POPA**! 
 
 ![POPA](assets/popa_display.png?raw=true "Popa")
 
-We had a blast during this DSC Hackathon, and could not thank you enough for 
-this opportunity!
+We had a blast during this DSC Retro Hackathon, thank you for the opportunity!
 
 # Inspiration
-We were inspired by our favourite games, Tetris, Breakout, Pacman. We took the
-best parts of each game and attempted to weave it into our game. (I.e the music,
-the graphics, the mechanics).
+We were inspired by our favourite retro games such as Tetris, Breakout, Pacman. 
+We took the best parts of each game, like combos and blocks from Tetris, the scoring 
+systems from Breakout, and the music inspiration from all three.
 
-We believe that art and music play a big part in a good game. We tried to go 
-for retro art and retro music that matched our theme.
+We believe that art and music play a big part in a good game. We made it a high priority
+to create retro art and music that matched our overall theme.
 
 # Requirements
-To be able to run this game you need GOOGLE CHROME. I think haven't tried with 
-others. Also refresh the page a couple times - because sometimes the font doesn't
-load. (You've got to play with Orbitron otherwise you can't say you've played the game.
-
-# Credit
-Music produced by US.
-Art owned by US.
-When I say US, I mean us not (United States). 
-
-The background however, was taken from a free background website. "You can
-immediately use for your project with ease!" they said. SO we did.
+Popa runs on Google Chrome, preferably. Other web browsers may work but all testing was done
+on Chrome, so we recommend it. 
+Aside: Also refresh the page a couple times - because sometimes the font doesn't load immediately. 
+(You've got to play with Orbitron otherwise you can't say you've played the game) :)
 
 # Tech Stack
-We used JAVASCRIPT. Namely a very good library called Phaser. We researched and 
-used Phaser for the first time today. (18th October 2020). It was very good with
-very clear API and a vast amount of useful functions. 
+We used Javascript in combination with a 2D game library Phaser 3 (it was our first time!)
+Game sprites designed in Piskel 
+Background music designed in Reaper/Cakewalk
 
-We used Piskel to generate our sprites. And Reaper/Cakewalk for music.
+# Credit
+Background music designed and produced by us.
+All art designed and created by us (apart from background).
+
+Background art sourced from: https://edermunizz.itch.io/free-pixel-art-forest
 
 # Last Words
-Please Enjoy The Game.
+Please Enjoy The Game and best of luck to the other competitors!
 
 
 
