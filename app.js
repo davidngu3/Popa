@@ -110,7 +110,7 @@ var Popa = new Phaser.Class({
 
         // bullet
         this.bullet = this.physics.add.group({
-            velocityY: -500
+            velocityY: -600
         });
 
         this.hpText = this.add.text(630, 300, "HP: 100", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
@@ -253,7 +253,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(250, 470, 'bullet');
                     this.buttonD.play('pressD', true);
                     this.DCD = true;
-                    this.time.addEvent({ delay: 250, callback: this.resetDCD, callbackScope: this });
+                    this.time.addEvent({ delay: 150, callback: this.resetDCD, callbackScope: this });
                 } else {
                     this.buttonD.play('releaseD', true);
                 }
@@ -264,7 +264,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(350, 470, 'bullet');
                     this.buttonF.play('pressF', true);
                     this.FCD = true;
-                    this.time.addEvent({ delay: 250, callback: this.resetFCD, callbackScope: this });
+                    this.time.addEvent({ delay: 150, callback: this.resetFCD, callbackScope: this });
                 } else {
                     this.buttonF.play('releaseF', true);
                 }
@@ -275,7 +275,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(450, 470, 'bullet');
                     this.buttonJ.play('pressJ', true);
                     this.JCD = true;
-                    this.time.addEvent({ delay: 250, callback: this.resetJCD, callbackScope: this });
+                    this.time.addEvent({ delay: 150, callback: this.resetJCD, callbackScope: this });
                 } else {
                     this.buttonJ.play('releaseJ', true);
                 }
@@ -286,7 +286,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(550, 470, 'bullet');
                     this.buttonK.play('pressK', true);
                     this.KCD = true;
-                    this.time.addEvent({ delay: 250, callback: this.resetKCD, callbackScope: this });
+                    this.time.addEvent({ delay: 150, callback: this.resetKCD, callbackScope: this });
                 } else {
                     this.buttonK.play('releaseK', true);
                 }
