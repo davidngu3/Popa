@@ -16,6 +16,9 @@ var Popa = new Phaser.Class({
             this.buttonD;
             this.bgm;
             this.score = 0;
+            this.hp = 100;
+            this.hpbar;
+            this.hpbase;
             this.scoreText;
             this.speed = 1;
             this.delay;
@@ -73,14 +76,16 @@ var Popa = new Phaser.Class({
         keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
         keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
-
+        // top bar
         this.bartop = this.physics.add.staticGroup();
         this.bartop.create(400, 10, 'bartop');
 
+        // bullet
         this.bullet = this.physics.add.group({
             velocityY: -500
         });
 
+        // score
         this.scoreText = this.add.text(636, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
 
         //  Our colliders
@@ -90,6 +95,16 @@ var Popa = new Phaser.Class({
 
         // timer
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
+
+        // health bar background
+        this.hpbase = this.add.rectangle(140, 40, 40, 500, 0xE9E1DF).setOrigin(0, 0);
+        this.hpbar = this.add.rectangle(140, 40, 40, 500, 0x44CD80).setOrigin(0, 0);
+    },
+
+    updateHp: function() {
+        let hpPercent = this.hp / 100;
+
+        this.hpbar = this.add.rectangle(140, 40, 40, 500 * hpPercent, 0xE9E1).setOrigin(0, 0);
     },
 
     collideWithPiece: function (bullet, piece) {
@@ -100,10 +115,15 @@ var Popa = new Phaser.Class({
     },
 
     collideWithTop: function (bullet, bartop) {
+        this.hp -= 10;
+        this.updateHp();
         bullet.disableBody(true, true);
     },
 
     collideWithButton: function (piece, button) {
+        this.hp -= 10;
+        this.updateHp();
+
         piece.disableBody(true, true);
         this.speed *= 1.2;
         this.bgm.rate *= 1.1;
