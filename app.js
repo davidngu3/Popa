@@ -20,6 +20,10 @@ var Popa = new Phaser.Class({
             this.bgm;
             this.score = 0;
             this.scoreText;
+            this.lvl = 1;
+            this.lvlText;
+            this.nextLevelScore = 10;
+            this.nextLevelScoreDiff = 10;
             this.speed = 1;
             this.delay;
             this.DCD = false;
@@ -96,7 +100,8 @@ var Popa = new Phaser.Class({
             velocityY: -500
         });
 
-        this.scoreText = this.add.text(636, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
+        this.scoreText = this.add.text(630, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
+        this.lvlText = this.add.text(630, 400, "Lvl: 1", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
 
         //  Our colliders
         this.physics.add.collider(this.bullet, this.bartop, this.collideWithTop, null, this);
@@ -162,6 +167,17 @@ var Popa = new Phaser.Class({
         piece.disableBody(true, true);
         this.score++;
         this.scoreText.setText('Score: ' + this.score);
+        if (this.score == this.nextLevelScore) {
+            this.lvl++;
+            this.lvlText.setText('Level: ' + this.lvl);
+            this.speed *= 1.2;
+            this.bgm.rate *= 1.05;
+            this.pieces.setVelocityY(this.speed * 100);
+            this.timedEvent.delay *= 0.8;
+            this.nextLevelScore = this.nextLevelScoreDiff + this.score;
+            this.nextLevelScoreDiff = Math.ceil(this.nextLevelScoreDiff * 1.5);
+            console.log(this.lvl, this.nextLevelScore, this.nextLevelScoreDiff);
+        }
     },
 
     collideWithTop: function (bullet, bartop) {
@@ -170,10 +186,6 @@ var Popa = new Phaser.Class({
 
     collideWithButton: function (piece, button) {
         piece.disableBody(true, true);
-        // this.speed *= 1.2;
-        // this.bgm.rate *= 1.1;
-        // this.pieces.setVelocityY(this.speed * 100);
-        // this.timedEvent.delay *= 0.8;
     },
 
     resetDCD: function () {
