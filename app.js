@@ -115,7 +115,7 @@ var Popa = new Phaser.Class({
 
         this.hpText = this.add.text(630, 300, "HP: 100", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
         this.scoreText = this.add.text(630, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
-        this.lvlText = this.add.text(630, 400, "Lvl: 1", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
+        this.lvlText = this.add.text(630, 400, "Level: 1", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
 
         //  Our colliders
         this.physics.add.collider(this.bullet, this.bartop, this.collideWithTop, null, this);
@@ -178,9 +178,6 @@ var Popa = new Phaser.Class({
     },
 
     updateHp: function () {
-        // let hpPercent = this.hp / 100;
-        // console.log(this.hp);
-        // this.hpbar = this.add.rectangle(140, 40, 40, 500 * hpPercent, 0xE9E1).setOrigin(0, 0);
         this.hpText.setText('HP: ' + this.hp);
     },
 
@@ -253,7 +250,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(250, 470, 'bullet');
                     this.buttonD.play('pressD', true);
                     this.DCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetDCD, callbackScope: this });
+                    this.time.addEvent({ delay: 125, callback: this.resetDCD, callbackScope: this });
                 } else {
                     this.buttonD.play('releaseD', true);
                 }
@@ -264,7 +261,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(350, 470, 'bullet');
                     this.buttonF.play('pressF', true);
                     this.FCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetFCD, callbackScope: this });
+                    this.time.addEvent({ delay: 125, callback: this.resetFCD, callbackScope: this });
                 } else {
                     this.buttonF.play('releaseF', true);
                 }
@@ -275,7 +272,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(450, 470, 'bullet');
                     this.buttonJ.play('pressJ', true);
                     this.JCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetJCD, callbackScope: this });
+                    this.time.addEvent({ delay: 125, callback: this.resetJCD, callbackScope: this });
                 } else {
                     this.buttonJ.play('releaseJ', true);
                 }
@@ -286,7 +283,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(550, 470, 'bullet');
                     this.buttonK.play('pressK', true);
                     this.KCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetKCD, callbackScope: this });
+                    this.time.addEvent({ delay: 125, callback: this.resetKCD, callbackScope: this });
                 } else {
                     this.buttonK.play('releaseK', true);
                 }
