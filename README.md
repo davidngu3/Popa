@@ -2,7 +2,8 @@
 
 ![POPA](assets/popa_display.png?raw=true "Popa")
 
-[Play Game](https://davidngu3.github.io/RetroGameHackathon).
+[Play Game](https://davidngu3.github.io/RetroGameHackathon)
+The controls are simply D F J K.
 
 
 We had a blast during this DSC Retro Hackathon, thank you for the opportunity!
