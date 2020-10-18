@@ -2,6 +2,9 @@
 
 ![POPA](assets/popa_display.png?raw=true "Popa")
 
+[Play Game](https://davidngu3.github.io/RetroGameHackathon).
+
+
 We had a blast during this DSC Retro Hackathon, thank you for the opportunity!
 
 # Inspiration
