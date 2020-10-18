@@ -14,11 +14,19 @@ var Popa = new Phaser.Class({
             this.pieces;
             this.timedEvent;
             this.buttonD;
+            this.buttonF;
+            this.buttonJ;
+            this.buttonK;
             this.bgm;
             this.score = 0;
             this.scoreText;
             this.speed = 1;
             this.delay;
+            this.DCD = false;
+            this.FCD = false;
+            this.JCD = false;
+            this.KCD = false;
+            this.time = 0;
         },
 
     preload: function () {
@@ -56,11 +64,18 @@ var Popa = new Phaser.Class({
         this.main.create(200, 0, 'main').setOrigin(0, 0);
 
         // create buttons group
+
         this.buttons = this.physics.add.staticGroup();
         this.buttons.create(250, 550, 'spriteD');
         this.buttons.create(350, 550, 'spriteF');
         this.buttons.create(450, 550, 'spriteJ');
         this.buttons.create(550, 550, 'spriteK');
+        this.buttonD = this.physics.add.sprite(250, 550, 'spriteD');
+        this.buttonF = this.physics.add.sprite(350, 550, 'spriteF');
+        this.buttonJ = this.physics.add.sprite(450, 550, 'spriteJ');
+        this.buttonK = this.physics.add.sprite(550, 550, 'spriteK');
+
+        //Timer for button CD and overall game time
 
         // create pieces group
         this.pieces = this.physics.add.group({
@@ -88,7 +103,57 @@ var Popa = new Phaser.Class({
         this.physics.add.collider(this.bullet, this.pieces, this.collideWithPiece, null, this);
         this.physics.add.collider(this.pieces, this.buttons, this.collideWithButton, null, this);
 
-        // timer
+
+        //  Our Button Sprites, Pressing and releasing
+        this.anims.create({
+            key: 'pressD',
+            frames: [{ key: 'spriteD', frame: 1 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'releaseD',
+            frames: [{ key: 'spriteD', frame: 0 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'pressF',
+            frames: [{ key: 'spriteF', frame: 1 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'releaseF',
+            frames: [{ key: 'spriteF', frame: 0 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'pressJ',
+            frames: [{ key: 'spriteJ', frame: 1 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'releaseJ',
+            frames: [{ key: 'spriteJ', frame: 0 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'pressK',
+            frames: [{ key: 'spriteK', frame: 1 }],
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'releaseK',
+            frames: [{ key: 'spriteK', frame: 0 }],
+            frameRate: 10,
+        });
+
+        // timers
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
     },
 
@@ -105,34 +170,84 @@ var Popa = new Phaser.Class({
 
     collideWithButton: function (piece, button) {
         piece.disableBody(true, true);
-        this.speed *= 1.2;
-        this.bgm.rate *= 1.1;
-        this.pieces.setVelocityY(this.speed * 100);
-        this.timedEvent.delay *= 0.8;
+        // this.speed *= 1.2;
+        // this.bgm.rate *= 1.1;
+        // this.pieces.setVelocityY(this.speed * 100);
+        // this.timedEvent.delay *= 0.8;
+    },
+
+    resetDCD: function () {
+        this.DCD = false
+        this.buttonD.play('releaseD', true);
+    },
+
+    resetFCD: function () {
+        this.FCD = false
+        this.buttonF.play('releaseF', true);
+    },
+
+    resetJCD: function () {
+        this.JCD = false
+        this.buttonJ.play('releaseJ', true);
+    },
+
+    resetKCD: function () {
+        this.KCD = false
+        this.buttonK.play('releaseK', true);
     },
 
     update: function () {
         //  Input events
         if (Phaser.Input.Keyboard.JustDown(keyD)) {
-            this.bullet.create(250, 470, 'bullet');
+            if (!this.DCD) {
+                this.bullet.create(250, 470, 'bullet');
+                this.buttonD.play('pressD', true);
+                this.DCD = true;
+                this.time.addEvent({ delay: 250, callback: this.resetDCD, callbackScope: this });
+            } else {
+                this.buttonD.play('releaseD', true);
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyF)) {
-            this.bullet.create(350, 470, 'bullet');
+            if (!this.FCD) {
+                this.bullet.create(350, 470, 'bullet');
+                this.buttonF.play('pressF', true);
+                this.FCD = true;
+                this.time.addEvent({ delay: 250, callback: this.resetFCD, callbackScope: this });
+            } else {
+                this.buttonF.play('releaseF', true);
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyJ)) {
-            this.bullet.create(450, 470, 'bullet');
+            if (!this.JCD) {
+                this.bullet.create(450, 470, 'bullet');
+                this.buttonJ.play('pressJ', true);
+                this.JCD = true;
+                this.time.addEvent({ delay: 250, callback: this.resetJCD, callbackScope: this });
+            } else {
+                this.buttonJ.play('releaseJ', true);
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyK)) {
-            this.bullet.create(550, 470, 'bullet');
+            if (!this.KCD) {
+                this.bullet.create(550, 470, 'bullet');
+                this.buttonK.play('pressK', true);
+                this.KCD = true;
+                this.time.addEvent({ delay: 250, callback: this.resetKCD, callbackScope: this });
+            } else {
+                this.buttonK.play('releaseK', true);
+            }
         }
+
     },
 
+    //Ticks once every timer delay
     createPiece: function () {
         var randColumn = Math.floor(Math.random() * 4); // random int from 0-3
 
         this.pieces.create(250 + randColumn * 100, 65, 'piece');
         this.pieces.setVelocityY(this.speed * 100);
-    }
+    },
 
 });
 
