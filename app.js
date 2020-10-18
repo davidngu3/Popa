@@ -17,6 +17,8 @@ var Popa = new Phaser.Class({
             this.bgm;
             this.score = 0;
             this.scoreText;
+            this.speed = 1;
+            this.delay;
         },
 
     preload: function () {
@@ -37,7 +39,7 @@ var Popa = new Phaser.Class({
         this.bgm = this.sound.add('bass', {
             mute: false,
             volume: 1,
-            rate: 1,
+            rate: this.speed,
             detune: 0,
             seek: 0,
             loop: true,
@@ -62,7 +64,7 @@ var Popa = new Phaser.Class({
 
         // create pieces group
         this.pieces = this.physics.add.group({
-            velocityY: 100,
+            velocityY: this.speed * 100,
         });
 
         // set key bindings
@@ -87,7 +89,7 @@ var Popa = new Phaser.Class({
         this.physics.add.collider(this.pieces, this.buttons, this.collideWithButton, null, this);
 
         // timer
-        timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
+        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
     },
 
     collideWithPiece: function (bullet, piece) {
@@ -103,6 +105,10 @@ var Popa = new Phaser.Class({
 
     collideWithButton: function (piece, button) {
         piece.disableBody(true, true);
+        this.speed *= 1.2;
+        this.bgm.rate *= 1.1;
+        this.pieces.setVelocityY(this.speed * 100);
+        this.timedEvent.delay *= 0.8;
     },
 
     update: function () {
@@ -123,18 +129,9 @@ var Popa = new Phaser.Class({
 
     createPiece: function () {
         var randColumn = Math.floor(Math.random() * 4); // random int from 0-3
-        if (randColumn == 0) {
-            this.pieces.create(250, 65, 'piece');
-        }
-        else if (randColumn == 1) {
-            this.pieces.create(350, 65, 'piece');
-        }
-        else if (randColumn == 2) {
-            this.pieces.create(450, 65, 'piece');
-        }
-        else if (randColumn == 3) {
-            this.pieces.create(550, 65, 'piece');
-        }
+
+        this.pieces.create(250 + randColumn * 100, 65, 'piece');
+        this.pieces.setVelocityY(this.speed * 100);
     }
 
 });
