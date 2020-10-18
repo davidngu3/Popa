@@ -22,9 +22,10 @@ var Popa = new Phaser.Class({
             this.hp = 100;
             this.hpbar;
             this.hpbase;
+            this.hpText;
             this.scoreText;
-            this.lvl = 1;
             this.lvlText;
+            this.lvl = 1;
             this.nextLevelScore = 10;
             this.nextLevelScoreDiff = 10;
             this.speed = 1;
@@ -34,6 +35,8 @@ var Popa = new Phaser.Class({
             this.JCD = false;
             this.KCD = false;
             this.time = 0;
+            this.gameOverText = "Game Over";
+            this.stopGame = false;
         },
 
     preload: function () {
@@ -52,6 +55,10 @@ var Popa = new Phaser.Class({
     },
 
     create: function () {
+
+        this.hpText = 100;
+        this.lvlText = 1;
+        this.scoreText = 0;
 
         this.bgm = this.sound.add('bass', {
             mute: false,
@@ -106,8 +113,9 @@ var Popa = new Phaser.Class({
             velocityY: -500
         });
 
-        this.scoreText = this.add.text(630, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
-        this.lvlText = this.add.text(630, 400, "Lvl: 1", { fontFamily: 'Orbitron', fontSize: '32px', fill: '#ffffff' });
+        this.hpText = this.add.text(630, 300, "HP: 100", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
+        this.scoreText = this.add.text(630, 500, "Score: 0", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
+        this.lvlText = this.add.text(630, 400, "Lvl: 1", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
 
         //  Our colliders
         this.physics.add.collider(this.bullet, this.bartop, this.collideWithTop, null, this);
@@ -167,14 +175,13 @@ var Popa = new Phaser.Class({
         // timers
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.createPiece, callbackScope: this, loop: true });
 
-        // health bar background
-        this.hpbase = this.add.rectangle(140, 40, 40, 500, 0xE9E1DF).setOrigin(0, 0);
-        this.hpbar = this.add.rectangle(140, 40, 40, 500, 0x44CD80).setOrigin(0, 0);
     },
 
-    updateHp: function() {
-        let hpPercent = this.hp / 100;
-        this.hpbar = this.add.rectangle(140, 40, 40, 500 * hpPercent, 0xE9E1DF).setOrigin(0, 0);
+    updateHp: function () {
+        // let hpPercent = this.hp / 100;
+        // console.log(this.hp);
+        // this.hpbar = this.add.rectangle(140, 40, 40, 500 * hpPercent, 0xE9E1).setOrigin(0, 0);
+        this.hpText.setText('HP: ' + this.hp);
     },
 
     collideWithPiece: function (bullet, piece) {
@@ -197,16 +204,24 @@ var Popa = new Phaser.Class({
     },
 
     collideWithTop: function (bullet, bartop) {
-        this.hp -= 10;
-        this.updateHp();
         bullet.disableBody(true, true);
+        this.hp = this.hp <= 5 ? this.endGame() : this.hp - 5;
+        this.updateHp();
     },
 
     collideWithButton: function (piece, button) {
-        this.hp -= 10;
-        this.updateHp();
-
         piece.disableBody(true, true);
+        this.hp = this.hp <= 5 ? this.endGame() : this.hp - 5;
+        this.updateHp();
+    },
+
+    endGame: function () {
+        this.timedEvent.loop = false;
+        console.log("GAME END");
+        this.gameOverText = this.add.text(200, 200, "Game Over", { fontFamily: 'Orbitron', fontSize: '72px', fill: '#ff3729' });
+        this.add.text(220, 400, "Hit F5 to play again!", { fontFamily: 'Orbitron', fontSize: '36px', fill: '#ff3729' });
+        this.stopGame = true;
+        return 0;
     },
 
     resetDCD: function () {
@@ -231,51 +246,52 @@ var Popa = new Phaser.Class({
 
     update: function () {
         //  Input events
-        if (Phaser.Input.Keyboard.JustDown(keyD)) {
-            if (!this.DCD) {
-                this.sound.play('press');
-                this.bullet.create(250, 470, 'bullet');
-                this.buttonD.play('pressD', true);
-                this.DCD = true;
-                this.time.addEvent({ delay: 250, callback: this.resetDCD, callbackScope: this });
-            } else {
-                this.buttonD.play('releaseD', true);
+        if (!this.stopGame) {
+            if (Phaser.Input.Keyboard.JustDown(keyD)) {
+                if (!this.DCD) {
+                    this.sound.play('press');
+                    this.bullet.create(250, 470, 'bullet');
+                    this.buttonD.play('pressD', true);
+                    this.DCD = true;
+                    this.time.addEvent({ delay: 250, callback: this.resetDCD, callbackScope: this });
+                } else {
+                    this.buttonD.play('releaseD', true);
+                }
+            }
+            if (Phaser.Input.Keyboard.JustDown(keyF)) {
+                if (!this.FCD) {
+                    this.sound.play('press');
+                    this.bullet.create(350, 470, 'bullet');
+                    this.buttonF.play('pressF', true);
+                    this.FCD = true;
+                    this.time.addEvent({ delay: 250, callback: this.resetFCD, callbackScope: this });
+                } else {
+                    this.buttonF.play('releaseF', true);
+                }
+            }
+            if (Phaser.Input.Keyboard.JustDown(keyJ)) {
+                if (!this.JCD) {
+                    this.sound.play('press');
+                    this.bullet.create(450, 470, 'bullet');
+                    this.buttonJ.play('pressJ', true);
+                    this.JCD = true;
+                    this.time.addEvent({ delay: 250, callback: this.resetJCD, callbackScope: this });
+                } else {
+                    this.buttonJ.play('releaseJ', true);
+                }
+            }
+            if (Phaser.Input.Keyboard.JustDown(keyK)) {
+                if (!this.KCD) {
+                    this.sound.play('press');
+                    this.bullet.create(550, 470, 'bullet');
+                    this.buttonK.play('pressK', true);
+                    this.KCD = true;
+                    this.time.addEvent({ delay: 250, callback: this.resetKCD, callbackScope: this });
+                } else {
+                    this.buttonK.play('releaseK', true);
+                }
             }
         }
-        if (Phaser.Input.Keyboard.JustDown(keyF)) {
-            if (!this.FCD) {
-                this.sound.play('press');
-                this.bullet.create(350, 470, 'bullet');
-                this.buttonF.play('pressF', true);
-                this.FCD = true;
-                this.time.addEvent({ delay: 250, callback: this.resetFCD, callbackScope: this });
-            } else {
-                this.buttonF.play('releaseF', true);
-            }
-        }
-        if (Phaser.Input.Keyboard.JustDown(keyJ)) {
-            if (!this.JCD) {
-                this.sound.play('press');
-                this.bullet.create(450, 470, 'bullet');
-                this.buttonJ.play('pressJ', true);
-                this.JCD = true;
-                this.time.addEvent({ delay: 250, callback: this.resetJCD, callbackScope: this });
-            } else {
-                this.buttonJ.play('releaseJ', true);
-            }
-        }
-        if (Phaser.Input.Keyboard.JustDown(keyK)) {
-            if (!this.KCD) {
-                this.sound.play('press');
-                this.bullet.create(550, 470, 'bullet');
-                this.buttonK.play('pressK', true);
-                this.KCD = true;
-                this.time.addEvent({ delay: 250, callback: this.resetKCD, callbackScope: this });
-            } else {
-                this.buttonK.play('releaseK', true);
-            }
-        }
-
     },
 
     //Ticks once every timer delay
