@@ -14,6 +14,7 @@ var Popa = new Phaser.Class({
             this.pieces;
             this.timedEvent;
             this.buttonD;
+            this.bgm;
         },
 
     preload: function () {
@@ -22,18 +23,33 @@ var Popa = new Phaser.Class({
         this.load.image('bullet', 'assets/bullet.png');
         this.load.image('topbar', 'assets/topbar.png');
         this.load.image('piece', 'assets/piece.png');
-        this.load.spritesheet('spriteD', 'assets/spriteD.png', {frameWidth: 100, frameHeight: 100});
-        this.load.spritesheet('spriteF', 'assets/spriteF.png', {frameWidth: 100, frameHeight: 100});
-        this.load.spritesheet('spriteJ', 'assets/spriteJ.png', {frameWidth: 100, frameHeight: 100});
-        this.load.spritesheet('spriteK', 'assets/spriteK.png', {frameWidth: 100, frameHeight: 100});
+        this.load.spritesheet('spriteD', 'assets/spriteD.png', { frameWidth: 100, frameHeight: 100 });
+        this.load.spritesheet('spriteF', 'assets/spriteF.png', { frameWidth: 100, frameHeight: 100 });
+        this.load.spritesheet('spriteJ', 'assets/spriteJ.png', { frameWidth: 100, frameHeight: 100 });
+        this.load.spritesheet('spriteK', 'assets/spriteK.png', { frameWidth: 100, frameHeight: 100 });
+        this.load.audio('bass', 'assets/Popa Theme.mp3');
     },
 
     create: function () {
+
+        this.bgm = this.sound.add('bass', {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        });
+
+        this.bgm.play();
+
         //  Enable world bounds, but disable the floor
         this.physics.world.setBoundsCollision(true, true, true, false);
 
         this.add.image(0, 0, 'background').setOrigin(0, 0);
-        this.add.image(200, 0, 'main').setOrigin(0, 0);
+        this.main = this.physics.add.staticGroup();
+        this.main.create(200, 0, 'main').setOrigin(0, 0);
 
         // create buttons group
         this.buttons = this.physics.add.staticGroup();
@@ -41,7 +57,7 @@ var Popa = new Phaser.Class({
         this.buttons.create(350, 550, 'spriteF');
         this.buttons.create(450, 550, 'spriteJ');
         this.buttons.create(550, 550, 'spriteK');
-        
+
         // create pieces group
         this.pieces = this.physics.add.group({
             velocityY: 100,
