@@ -8,6 +8,18 @@
 <body>
 
     <script>
+        // game.physics.startSystem(Phaser.Physics.ARCADE);
+        //  Our bullet group
+        // bullets = game.add.group();
+        // bullets.enableBody = true;
+        // bullets.physicsBodyType = Phaser.Physics.ARCADE;
+        // bullets.createMultiple(30, 'bullet');
+        // bullets.setAll('anchor.x', 0.5);
+        // bullets.setAll('anchor.y', 1);
+        // bullets.setAll('outOfBoundsKill', true);
+        // bullets.setAll('checkWorldBounds', true);
+        var keyD;
+
         var config = {
             type: Phaser.AUTO,
             width: 800,
@@ -35,9 +47,15 @@
             this.load.image('F', 'assets/button-F.png');
             this.load.image('J', 'assets/button-J.png');
             this.load.image('K', 'assets/button-K.png');
+            this.load.image('bullet', 'assets/bullet.png');
         }
 
         function create() {
+            keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);    
+            keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);    
+            keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);    
+            keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);    
+
             this.add.image(0, 0, 'background').setOrigin(0, 0);
             this.add.image(200, 0, 'main').setOrigin(0, 0);
             this.add.image(200, 500,'D').setOrigin(0, 0);
@@ -47,7 +65,14 @@
         }
 
         function update() {
-
+            
+        }
+        
+        function pressKey(key) {
+            if (Phaser.Input.Keyboard.JustDown(keyD))
+            {
+                console.log('fire');
+            }
         }
 
     </script>
