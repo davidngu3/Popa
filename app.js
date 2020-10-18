@@ -47,6 +47,8 @@ var Popa = new Phaser.Class({
         this.load.spritesheet('spriteJ', 'assets/spriteJ.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteK', 'assets/spriteK.png', { frameWidth: 100, frameHeight: 100 });
         this.load.audio('bass', 'assets/Popa Theme.mp3');
+        this.load.audio('blop', 'assets/blop.wav');
+        this.load.audio('press', 'assets/togglesound.mp3');
     },
 
     create: function () {
@@ -172,11 +174,11 @@ var Popa = new Phaser.Class({
 
     updateHp: function() {
         let hpPercent = this.hp / 100;
-
-        this.hpbar = this.add.rectangle(140, 40, 40, 500 * hpPercent, 0xE9E1).setOrigin(0, 0);
+        this.hpbar = this.add.rectangle(140, 40, 40, 500 * hpPercent, 0xE9E1DF).setOrigin(0, 0);
     },
 
     collideWithPiece: function (bullet, piece) {
+        this.sound.play('blop');
         bullet.disableBody(true, true);
         piece.disableBody(true, true);
         this.score++;
@@ -231,6 +233,7 @@ var Popa = new Phaser.Class({
         //  Input events
         if (Phaser.Input.Keyboard.JustDown(keyD)) {
             if (!this.DCD) {
+                this.sound.play('press');
                 this.bullet.create(250, 470, 'bullet');
                 this.buttonD.play('pressD', true);
                 this.DCD = true;
@@ -241,6 +244,7 @@ var Popa = new Phaser.Class({
         }
         if (Phaser.Input.Keyboard.JustDown(keyF)) {
             if (!this.FCD) {
+                this.sound.play('press');
                 this.bullet.create(350, 470, 'bullet');
                 this.buttonF.play('pressF', true);
                 this.FCD = true;
@@ -251,6 +255,7 @@ var Popa = new Phaser.Class({
         }
         if (Phaser.Input.Keyboard.JustDown(keyJ)) {
             if (!this.JCD) {
+                this.sound.play('press');
                 this.bullet.create(450, 470, 'bullet');
                 this.buttonJ.play('pressJ', true);
                 this.JCD = true;
@@ -261,6 +266,7 @@ var Popa = new Phaser.Class({
         }
         if (Phaser.Input.Keyboard.JustDown(keyK)) {
             if (!this.KCD) {
+                this.sound.play('press');
                 this.bullet.create(550, 470, 'bullet');
                 this.buttonK.play('pressK', true);
                 this.KCD = true;
