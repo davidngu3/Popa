@@ -1,5 +1,7 @@
 Welcome to **POPA**! 
 
+![POPA](assets/POPAPIC.png?raw=true "Popa")
+
 We had a blast during this DSC Hackathon, and could not thank you enough for 
 this opportunity!
 
