@@ -5,7 +5,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: -100 },
             debug: false
         }
     },
@@ -15,11 +15,17 @@ var config = {
         update: update
     }
 };
-var bullets;
+
 var game = new Phaser.Game(config);
 
+// global variables
+var bullet;
+var bullets;
 var bulletTime = 0;
 var keyD;
+var keyF;
+var keyJ;
+var keyK;
 var buttons;
 
 
@@ -31,40 +37,43 @@ function preload() {
     this.load.image('J', 'assets/button-J.png');
     this.load.image('K', 'assets/button-K.png');
     this.load.image('bullet', 'assets/bullet.png');
+    this.load.image('topbar', 'assets/topbar.png');
 }
 
 function create() {
-    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-    keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-    keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-
+    // create background
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.add.image(200, 0, 'main').setOrigin(0, 0);
-    // this.add.image(200, 500, 'D').setOrigin(0, 0);
-    // this.add.image(300, 500, 'F').setOrigin(0, 0);
-    // this.add.image(400, 500, 'J').setOrigin(0, 0);
-    // this.add.image(500, 500, 'K').setOrigin(0, 0);
 
+    // create buttons group
     buttons = this.physics.add.staticGroup();
-
     buttons.create(200, 500, 'D').setOrigin(0, 0);
     buttons.create(300, 500, 'F').setOrigin(0, 0);
     buttons.create(400, 500, 'J').setOrigin(0, 0);
     buttons.create(500, 500, 'K').setOrigin(0, 0);
 
+    // set key bindings
+    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+    keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+    keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+    
+    // create bullet group
     bullets = this.physics.add.group({
         key: 'bullet',
-        setXY: { x: 500, y: 0 },
-        velocity: { x: 100 }
+        maxSize: 20,
+        runChildUpdate: true
     });
 
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    bullets.createMultiple(1, 'bullet');
-    bullets.setVelocity(30);
 
-    this.physics.add.collider(bullets, buttons);
+    // 
+    topbar = this.physics.add.staticGroup();
+    topbar.create(400, 10, 'topbar');
+
+    // collision setup
+    this.physics.add.collider(bullets, topbar);
 }
 
 function update() {
@@ -85,8 +94,12 @@ function update() {
 }
 
 function fireBullet() {
-    bullets.create(200, 100, 'bullet');
-
+    var bullet = this.bullets.get();
+    if (bullet) {
+        bullet.enableBody(true, 250, 470, true, true);
+        bullet.setVelocityY(-1000);
+    }
+    
 }
 
 function resetBullet(bullet) {
