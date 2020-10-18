@@ -10,7 +10,7 @@ var Popa = new Phaser.Class({
             this.background;
             this.main;
             this.buttons;
-            this.bartop;
+            this.topbar;
             this.pieces;
             this.timedEvent;
             this.buttonD;
@@ -23,13 +23,13 @@ var Popa = new Phaser.Class({
         this.load.image('background', 'assets/background.png');
         this.load.image('main', 'assets/main.png');
         this.load.image('bullet', 'assets/bullet.png');
-        this.load.image('bartop', 'assets/bartop.png');
+        this.load.image('topbar', 'assets/topbar.png');
         this.load.image('piece', 'assets/piece.png');
         this.load.spritesheet('spriteD', 'assets/spriteD.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteF', 'assets/spriteF.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteJ', 'assets/spriteJ.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteK', 'assets/spriteK.png', { frameWidth: 100, frameHeight: 100 });
-        this.load.audio('bass', 'assets/Popa Theme.mp3');
+        this.load.audio('bass', 'assets/Popa Theme 2.mp3');
     },
 
     create: function () {
@@ -72,17 +72,18 @@ var Popa = new Phaser.Class({
         keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
 
-        this.bartop = this.physics.add.staticGroup();
-        this.bartop.create(400, 10, 'bartop');
+        this.topbar = this.physics.add.staticGroup();
+        this.topbar.create(400, 10, 'topbar');
 
         this.bullet = this.physics.add.group({
             velocityY: -100
         });
 
+
         this.scoreText = this.add.text(620, 16, "Score: 0", { fontSize: '32px', fill: '#ffffff' });
 
         //  Our colliders
-        this.physics.add.collider(this.bullet, this.bartop, this.collideWithTop, null, this);
+        this.physics.add.collider(this.bullet, this.topbar, this.collideWithTop, null, this);
         this.physics.add.collider(this.bullet, this.pieces, this.collideWithPiece, null, this);
         this.physics.add.collider(this.pieces, this.buttons, this.collideWithButton, null, this);
 
@@ -94,10 +95,11 @@ var Popa = new Phaser.Class({
         bullet.disableBody(true, true);
         piece.disableBody(true, true);
         this.score++;
+        console.log(this.score);
         this.scoreText.setText('Score: ' + this.score);
     },
 
-    collideWithTop: function (bullet, bartop) {
+    collideWithTop: function (bullet, topbar) {
         bullet.disableBody(true, true);
     },
 
