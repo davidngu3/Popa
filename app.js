@@ -60,7 +60,7 @@ var Popa = new Phaser.Class({
 
         // create pieces group
         this.pieces = this.physics.add.group({
-            velocityY: 100,
+            velocityY: 200,
         });
 
         // set key bindings
@@ -74,7 +74,7 @@ var Popa = new Phaser.Class({
         this.bartop.create(400, 10, 'bartop');
 
         this.bullet = this.physics.add.group({
-            velocityY: -100
+            velocityY: -500
         });
 
         //  Our colliders
@@ -118,16 +118,16 @@ var Popa = new Phaser.Class({
     createPiece: function () {
         var randColumn = Math.floor(Math.random() * 4); // random int from 0-3
         if (randColumn == 0) {
-            this.pieces.create(250, 65, 'piece');
+            this.pieces.create(250, 0, 'piece');
         }
         else if (randColumn == 1) {
-            this.pieces.create(350, 65, 'piece');
+            this.pieces.create(350, 0, 'piece');
         }
         else if (randColumn == 2) {
-            this.pieces.create(450, 65, 'piece');
+            this.pieces.create(450, 0, 'piece');
         }
         else if (randColumn == 3) {
-            this.pieces.create(550, 65, 'piece');
+            this.pieces.create(550, 0, 'piece');
         }
     }
 
