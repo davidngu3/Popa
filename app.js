@@ -42,9 +42,9 @@ var Popa = new Phaser.Class({
     preload: function () {
         this.load.image('background', 'assets/background.png');
         this.load.image('main', 'assets/main.png');
-        this.load.image('bullet', 'assets/bullet.png');
+        this.load.image('bullet', 'assets/bullet3.png');
         this.load.image('bartop', 'assets/bartop.png');
-        this.load.image('piece', 'assets/piece.png');
+        this.load.image('piece', 'assets/piece3.png');
         this.load.spritesheet('spriteD', 'assets/spriteD.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteF', 'assets/spriteF.png', { frameWidth: 100, frameHeight: 100 });
         this.load.spritesheet('spriteJ', 'assets/spriteJ.png', { frameWidth: 100, frameHeight: 100 });
@@ -95,7 +95,7 @@ var Popa = new Phaser.Class({
 
         // create pieces group
         this.pieces = this.physics.add.group({
-            velocityY: this.speed * 100,
+            velocityY: this.speed * 200,
         });
 
         // set key bindings
@@ -110,7 +110,8 @@ var Popa = new Phaser.Class({
 
         // bullet
         this.bullet = this.physics.add.group({
-            velocityY: -600
+            velocityY: -200 * this.speed,
+            accelerationY: -2000,
         });
 
         this.hpText = this.add.text(630, 300, "HP: 100", { fontFamily: 'Orbitron', fontSize: '28px', fill: '#ffffff' });
@@ -253,7 +254,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(250, 470, 'bullet');
                     this.buttonD.play('pressD', true);
                     this.DCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetDCD, callbackScope: this });
+                    this.time.addEvent({ delay: 20, callback: this.resetDCD, callbackScope: this });
                 } else {
                     this.buttonD.play('releaseD', true);
                 }
@@ -264,7 +265,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(350, 470, 'bullet');
                     this.buttonF.play('pressF', true);
                     this.FCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetFCD, callbackScope: this });
+                    this.time.addEvent({ delay: 20, callback: this.resetFCD, callbackScope: this });
                 } else {
                     this.buttonF.play('releaseF', true);
                 }
@@ -275,7 +276,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(450, 470, 'bullet');
                     this.buttonJ.play('pressJ', true);
                     this.JCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetJCD, callbackScope: this });
+                    this.time.addEvent({ delay: 20, callback: this.resetJCD, callbackScope: this });
                 } else {
                     this.buttonJ.play('releaseJ', true);
                 }
@@ -286,7 +287,7 @@ var Popa = new Phaser.Class({
                     this.bullet.create(550, 470, 'bullet');
                     this.buttonK.play('pressK', true);
                     this.KCD = true;
-                    this.time.addEvent({ delay: 150, callback: this.resetKCD, callbackScope: this });
+                    this.time.addEvent({ delay: 20, callback: this.resetKCD, callbackScope: this });
                 } else {
                     this.buttonK.play('releaseK', true);
                 }
@@ -298,7 +299,7 @@ var Popa = new Phaser.Class({
     createPiece: function () {
         var randColumn = Math.floor(Math.random() * 4); // random int from 0-3
 
-        this.pieces.create(250 + randColumn * 100, 65, 'piece');
+        this.pieces.create(250 + randColumn * 100, 30, 'piece');
         this.pieces.setVelocityY(this.speed * 100);
     },
 
